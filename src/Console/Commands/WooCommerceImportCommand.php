@@ -33,12 +33,11 @@ class WooCommerceImportCommand extends Command
     protected $description = 'Import CSV export files from WooCommerce';
 
     public function handle(
-        CsvExportLoader                    $loader,
+        CsvExportLoader $loader,
         ProductCollectionToTaxaTransformer $taxaTransformer,
         ProductCollectionToPropertiesTransformer $propertiesTransformer,
         WooToVaniloProductTransformer $productTransformer,
-    )
-    {
+    ) {
         $products = $loader->parseFile($this->argument('file'));
         $taxaCreated = $this->processCategories($products, $taxaTransformer);
         $propertyValuesCreated = $propertiesTransformer->handle($products);
