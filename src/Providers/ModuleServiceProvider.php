@@ -15,7 +15,16 @@ declare(strict_types=1);
 namespace Vanilo\WooCommerce\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Vanilo\WooCommerce\Console\Commands\WooCommerceImportCommand;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
+    public function boot()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                WooCommerceImportCommand::class,
+            ]);
+        }
+    }
 }
