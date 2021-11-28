@@ -49,6 +49,23 @@ class ProductCollection extends Collection
         }
     }
 
+    public function hasCategories(): bool
+    {
+        /** @var Product $product */
+        foreach ($this->items as $product) {
+            if (!empty($product->categories)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasNoCategories(): bool
+    {
+        return !$this->hasCategories();
+    }
+
     /**
      * @throws InvalidArgumentException
      */

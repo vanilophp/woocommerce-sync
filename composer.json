@@ -24,6 +24,8 @@
         "ext-pdo": "*",
         "laravel/framework": "^8.22.1",
         "vanilo/product": "^2.0|^3.x-dev",
+        "vanilo/category": "^2.0|^3.x-dev",
+        "vanilo/properties": "^2.0|^3.x-dev",
         "spatie/laravel-medialibrary": "^9.0"
     },
     "autoload": {

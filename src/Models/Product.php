@@ -16,7 +16,11 @@ namespace Vanilo\WooCommerce\Models;
 
 final class Product
 {
+    public string $id;
+
     public string $sku;
+
+    public string $name;
 
     public array $categories = [];
 
@@ -45,13 +49,15 @@ final class Product
     public ProductType $type;
 
     public function __construct(
-        public string $id,
-        public string $name,
+        string $id,
+        string $name,
         ?string $sku = null,
         ?ProductType $type = null,
     ) {
+        $this->id = $id;
         $this->sku = $sku ?? $this->id;
         $this->type = $type ?? ProductType::create();
+        $this->name = $name;
     }
 
     public function hasParent(): bool

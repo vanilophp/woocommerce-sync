@@ -88,4 +88,28 @@ class ProductCollectionTest extends TestCase
         $products->put('1', new Product('123', 'Product'));
         $this->assertCount(1, $products);
     }
+
+    /** @test */
+    public function it_can_tell_if_there_were_any_categories_within_the_collection()
+    {
+        $product1 = new Product('123', '123');
+        $product1->categories = ['Diapers' => null];
+        $product2 = new Product('222', '222');
+
+        $collection = (new ProductCollection($product1, $product2));
+
+        $this->assertTrue($collection->hasCategories());
+    }
+
+    /** @test */
+    public function it_can_tell_if_there_were_no_categories_within_the_collection()
+    {
+        $products = new ProductCollection(
+            new Product('1', 'Ha'),
+            new Product('2', 'Ho'),
+            new Product('3', 'Yo'),
+        );
+
+        $this->assertTrue($products->hasNoCategories());
+    }
 }

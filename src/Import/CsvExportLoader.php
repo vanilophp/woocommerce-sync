@@ -21,6 +21,7 @@ class CsvExportLoader
     public function parseFile(string $fileName): ProductCollection
     {
         $result = new ProductCollection();
+        /** @todo Implement this */
         // Get the first row of the CSV, it contains the column names
         // Store the column "map" (column name => column index)
 
