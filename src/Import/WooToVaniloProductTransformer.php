@@ -24,6 +24,14 @@ class WooToVaniloProductTransformer
     {
         $result = ProductProxy::firstOrNew($product->sku);
         // @todo fill attributes
+
+        // to store the images:
+        foreach ($product->images as $remoteImage) {
+            if (method_exists($result, 'addMediaFromUrl')) {
+                $result->addMediaFromUrl($remoteImage)->toMediaCollection();
+            }
+        }
+
         // Don't save the result, just return it
 
         return $result;
