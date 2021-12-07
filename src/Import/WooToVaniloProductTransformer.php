@@ -16,23 +16,32 @@ namespace Vanilo\WooCommerce\Import;
 
 use Vanilo\Product\Contracts\Product as VaniloProduct;
 use Vanilo\Product\Models\ProductProxy;
+use Vanilo\Product\Models\ProductState;
 use Vanilo\WooCommerce\Models\Product;
 
 class WooToVaniloProductTransformer
 {
     public function handle(Product $product): VaniloProduct
     {
-        $result = ProductProxy::firstOrNew($product->sku);
-        // @todo fill attributes
+        $result = ProductProxy::firstOrNew(
+            ['sku' => $product->sku],
+            [
+                'name' => $product->name,
+                'price' => $product->salePrice,
+                'excerpt' => $product->shortDescription,
+                'description' => $product->description,
+                'state' => $product->isPublished ? ProductState::ACTIVE : ProductState::INACTIVE,
+                'stock' => is_int($product->inStock) ? $product->inStock : 0,
+            ]
+        );
 
-        // to store the images:
-        foreach ($product->images as $remoteImage) {
-            if (method_exists($result, 'addMediaFromUrl')) {
-                $result->addMediaFromUrl($remoteImage)->toMediaCollection();
+        if (!$result->exists()) {
+            foreach ($product->images as $remoteImage) {
+                if (method_exists($result, 'addMediaFromUrl')) {
+                    $result->addMediaFromUrl($remoteImage)->toMediaCollection();
+                }
             }
         }
-
-        // Don't save the result, just return it
 
         return $result;
     }

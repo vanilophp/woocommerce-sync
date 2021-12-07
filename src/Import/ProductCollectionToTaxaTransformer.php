@@ -16,10 +16,12 @@ namespace Vanilo\WooCommerce\Import;
 
 use Vanilo\Category\Contracts\Taxonomy;
 use Vanilo\Category\Models\TaxonProxy;
+use Vanilo\WooCommerce\Models\Product;
 use Vanilo\WooCommerce\Models\ProductCollection;
 
 /**
  * This class converts "categories" found in a WooCommerce product collection into Vanilo Taxons
+ *
  * @see https://vanilo.io/docs/2.x/categorization
  */
 class ProductCollectionToTaxaTransformer
@@ -30,24 +32,27 @@ class ProductCollectionToTaxaTransformer
     public function handle(ProductCollection $products, Taxonomy $taxonomy): int
     {
         $result = 0;
-        // Iterate through the products
-        // Build hierarchical taxon tree (in memory)
-        // Eg.
-        //   Diapers
-        //      └────╼ Printed Diapers
-        //               └───────────────╼ Bambino
-        // Iterate through the taxon tree
-        // Check if each taxon exists, create if not, also set their parents
-        // Create the taxon entries withing the passed $taxonomy
-        //
-        // Example:
-        TaxonProxy::create([
-           'taxonomy_id' => $taxonomy->id,
-            'parent_id' => null, // or $parentTaxon->id,
-            'name' => 'Printed Diapers'
-        ]);
-        //
-        // inc $result++ on each item created
+
+        $products->each(function (Product $product) use ($taxonomy, &$result) {
+            foreach ($product->categories as $category => $parent) {
+                if (!$parent) {
+                    $parent = TaxonProxy::firstOrCreate(['name' => $category, 'taxonomy_id' => $taxonomy->id]);
+
+                    if ($parent->wasRecentlyCreated) {
+                        $result++;
+                    }
+                    continue;
+                }
+
+                $parent = TaxonProxy::where('name', $parent)->first();
+
+                $child = TaxonProxy::firstOrCreate(['name' => $category, 'parent_id' => $parent->id, 'taxonomy_id' => $taxonomy->id]);
+
+                if ($child->wasRecentlyCreated) {
+                    $result++;
+                }
+            }
+        });
 
         return $result;
     }

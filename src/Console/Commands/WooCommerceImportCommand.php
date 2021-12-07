@@ -63,9 +63,9 @@ class WooCommerceImportCommand extends Command
         $this->table(
             ['Entry', 'Created', 'Updated', 'Skipped'],
             [
-                'Categories', $taxaCreated, '-', '-',
-                'Properties', $propertyValuesCreated, '-', '-',
-                'Products', $productsCreated, $productsUpdated, $productsSkipped,
+                ['Categories', $taxaCreated, '-', '-',],
+                ['Properties', $propertyValuesCreated, '-', '-'],
+                ['Products', $productsCreated, $productsUpdated, $productsSkipped],
             ]
         );
     }
@@ -83,7 +83,7 @@ class WooCommerceImportCommand extends Command
             return $found;
         }
 
-        $found = Taxonomy::first();
+        $found = TaxonomyProxy::first();
         if (null === $found) {
             $this->error("There is no taxonomy in the system at all");
             exit(32);
