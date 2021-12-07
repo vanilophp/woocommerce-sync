@@ -26,7 +26,7 @@ class CsvExportLoader
 
         if (($handle = fopen($fileName, "r")) !== false) {
             $first = true;
-            while (($row = fgetcsv($handle,)) !== false) {
+            while (($row = fgetcsv($handle, )) !== false) {
                 if (!$first) {
                     $result->push($this->parseRow($row));
                 }
@@ -45,16 +45,16 @@ class CsvExportLoader
 
         $product = new Product($row[0], $row[3], $sku, new ProductType($row[1]));
 
-        $product->isPublished = (bool)$row[4];
+        $product->isPublished = (bool) $row[4];
         $product->shortDescription = $row[7];
         $product->description = $row[8];
         $product->inStock = $row[13];
-        $product->salePrice = (float)$row[24];
-        $product->regularPrice = (float)$row[25];
+        $product->salePrice = (float) $row[24];
+        $product->regularPrice = (float) $row[25];
         $product->tags = empty($row[27]) ? [] : explode(', ', $row[27]);
         $product->images = empty($row[29]) ? [] : explode(', ', $row[29]);
         $product->parentId = empty($row[32]) ? null : str_replace('id:', '', $row[32]);
-        $product->position = (int)$row[38];
+        $product->position = (int) $row[38];
 
         $this->parseCategories($product, $row);
 
@@ -86,7 +86,7 @@ class CsvExportLoader
             $prev = null;
 
             foreach ($nodes as $key => $node) {
-                $results[$node] = $key === 0 ? null : $prev;
+                $results[$node] = 0 === $key ? null : $prev;
                 $prev = $node;
             }
         }
