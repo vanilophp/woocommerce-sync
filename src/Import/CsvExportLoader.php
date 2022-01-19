@@ -26,7 +26,7 @@ class CsvExportLoader
 
         if (($handle = fopen($fileName, "r")) !== false) {
             $first = true;
-            while (($row = fgetcsv($handle, )) !== false) {
+            while (($row = fgetcsv($handle)) !== false) {
                 if (!$first) {
                     $result->push($this->parseRow($row));
                 }

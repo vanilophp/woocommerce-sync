@@ -26,7 +26,7 @@ use Vanilo\WooCommerce\Models\ProductCollection;
 
 class WooCommerceImportCommand extends Command
 {
-    protected $signature = 'woocom:import
+    protected $signature = 'vanilo:woo:import
                             {file : The path of the CSV file}
                             {--taxonomy= : The name of the taxonomy tree to map Categories onto. The first taxonomy will be used if unspecified}';
 

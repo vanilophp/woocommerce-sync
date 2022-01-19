@@ -6,3 +6,18 @@
 [![StyleCI](https://styleci.io/repos/432689407/shield?branch=master)](https://styleci.io/repos/432689407)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
+## Installation
+
+> Make sure your application has [Vanilo Framework or the Product Module](https://vanilo.io/docs/) installed
+
+Install the package with composer:
+
+```bash
+composer require vanilo/woocommerce-sync
+```
+
+## Usage
+
+```bash
+php artisan vanilo:woo:import wc-product-export-XXXX.csv
+```
