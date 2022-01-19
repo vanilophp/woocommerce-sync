@@ -22,7 +22,7 @@ class ImportCommandTest extends TestCase
     /** @test */
     public function the_artisan_command_exists()
     {
-        $this->assertEquals(0, Artisan::call('woocom:import', ['--help']));
+        $this->assertEquals(0, Artisan::call('vanilo:woo:import', ['--help']));
     }
 
     ////$this->assertEquals(Concord::VERSION, rtrim(Artisan::output()));
