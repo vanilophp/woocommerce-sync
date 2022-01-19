@@ -1,6 +1,6 @@
 # Vanilo WooCommerce Module Changelog
 
-## Unreleased
-##### 2021-12-XX
+## 1.0.0
+##### 2022-01-19
 
-- Added CLI tool that can import WooCommmerce CSV export files 
+- Added CLI tool that can import from WooCommmerce CSV export files 
