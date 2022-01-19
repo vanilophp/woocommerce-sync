@@ -42,6 +42,8 @@ class WooCommerceImportCommand extends Command
         $taxaCreated = $this->processCategories($products, $taxaTransformer);
         $propertyValuesCreated = $propertiesTransformer->handle($products);
 
+        $bar = $this->output->createProgressBar($products->count());
+
         $productsCreated = 0;
         $productsUpdated = 0;
         $productsSkipped = 0;
@@ -58,7 +60,11 @@ class WooCommerceImportCommand extends Command
             } else {
                 $productsSkipped++;
             }
+            $bar->advance();
         }
+
+        $bar->finish();
+        $this->output->newLine();
 
         $this->table(
             ['Entry', 'Created', 'Updated', 'Skipped'],

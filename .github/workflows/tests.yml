@@ -8,8 +8,11 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        php: ['8.0']
+        php: ['8.0', '8.1']
         laravel: ['8.22.1', '8.80']
+        exclue:
+          - php: '8.1'
+            laravel: '8.22.1'
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
     steps:
       - name: Checkout

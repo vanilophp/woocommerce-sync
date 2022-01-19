@@ -64,4 +64,9 @@ final class Product
     {
         return null !== $this->parentId;
     }
+
+    public function isAssignedToCategories(): bool
+    {
+        return (bool) count($this->categories);
+    }
 }

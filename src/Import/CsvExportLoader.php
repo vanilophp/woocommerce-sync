@@ -46,11 +46,11 @@ class CsvExportLoader
         $product = new Product($row[0], $row[3], $sku, new ProductType($row[1]));
 
         $product->isPublished = (bool) $row[4];
-        $product->shortDescription = $row[7];
-        $product->description = $row[8];
+        $product->shortDescription = $this->crlf($row[7]);
+        $product->description = $this->crlf($row[8]);
         $product->inStock = $row[13];
-        $product->salePrice = (float) $row[24];
-        $product->regularPrice = (float) $row[25];
+        $product->salePrice = empty($row[24]) ? null : floatval($row[24]);
+        $product->regularPrice = empty($row[25]) ? null : floatval($row[25]);
         $product->tags = empty($row[27]) ? [] : explode(', ', $row[27]);
         $product->images = empty($row[29]) ? [] : explode(', ', $row[29]);
         $product->parentId = empty($row[32]) ? null : str_replace('id:', '', $row[32]);
@@ -78,19 +78,33 @@ class CsvExportLoader
             return;
         }
 
-        $categories = explode(', ', $row[26]);
+        $categories = explode(',', $row[26]);
+        array_walk($categories, 'trim');
         $results = [];
 
         foreach ($categories as $category) {
-            $nodes = explode(' > ', $category);
+            $nodes = explode('>', $category);
             $prev = null;
 
             foreach ($nodes as $key => $node) {
+                $node = trim($node);
                 $results[$node] = 0 === $key ? null : $prev;
                 $prev = $node;
             }
         }
 
         $product->categories = $results;
+    }
+
+    /**
+     * @see https://github.com/woocommerce/woocommerce/blob/6.1.0/plugins/woocommerce/includes/export/class-wc-product-csv-exporter.php#L584
+     */
+    private function crlf(?string $text): ?string
+    {
+        if(null === $text) {
+            return null;
+        }
+
+        return str_replace("\x2E\x0D\\n", "\n\n", $text);
     }
 }
