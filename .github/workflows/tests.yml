@@ -10,7 +10,7 @@ jobs:
       matrix:
         php: ['8.0', '8.1']
         laravel: ['8.22.1', '8.80']
-        exclue:
+        exclude:
           - php: '8.1'
             laravel: '8.22.1'
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
