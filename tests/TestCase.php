@@ -18,7 +18,6 @@ use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Vanilo\WooCommerce\Providers\WooCommerceServiceProvider;
-use Vanilo\WooCommerce\Providers\WooCommerceServiceProvider as WooCommerceModule;
 
 abstract class TestCase extends Orchestra
 {
