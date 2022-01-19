@@ -101,7 +101,7 @@ class CsvExportLoader
      */
     private function crlf(?string $text): ?string
     {
-        if(null === $text) {
+        if (null === $text) {
             return null;
         }
 
