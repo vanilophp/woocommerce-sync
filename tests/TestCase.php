@@ -17,7 +17,8 @@ namespace Vanilo\WooCommerce\Tests;
 use Konekt\Concord\ConcordServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
-use Vanilo\WooCommerce\Providers\ModuleServiceProvider as WooCommerceModule;
+use Vanilo\WooCommerce\Providers\WooCommerceServiceProvider;
+use Vanilo\WooCommerce\Providers\WooCommerceServiceProvider as WooCommerceModule;
 
 abstract class TestCase extends Orchestra
 {
@@ -38,6 +39,7 @@ abstract class TestCase extends Orchestra
         return [
             ConcordServiceProvider::class,
             MediaLibraryServiceProvider::class,
+            WooCommerceServiceProvider::class,
         ];
     }
 
@@ -75,16 +77,5 @@ abstract class TestCase extends Orchestra
     {
         $this->loadLaravelMigrations();
         $this->artisan('migrate', ['--force' => true]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function resolveApplicationConfiguration($app)
-    {
-        parent::resolveApplicationConfiguration($app);
-        $app['config']->set('concord.modules', [
-            WooCommerceModule::class,
-        ]);
     }
 }

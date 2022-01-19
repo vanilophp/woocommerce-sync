@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Contains the ModuleServiceProvider class.
+ * Contains the WooCommerceServiceProvider class.
  *
  * @copyright   Copyright (c) 2021 Attila Fulop
  * @author      Attila Fulop
@@ -14,10 +14,10 @@ declare(strict_types=1);
 
 namespace Vanilo\WooCommerce\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use Vanilo\WooCommerce\Console\Commands\WooCommerceImportCommand;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class WooCommerceServiceProvider extends ServiceProvider
 {
     public function boot()
     {
