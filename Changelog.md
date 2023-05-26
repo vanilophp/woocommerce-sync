@@ -1,5 +1,11 @@
 # Vanilo WooCommerce Module Changelog
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added Laravel 10 support
+- Added Vanilo 4 support
+
 ## 1.1.0
 ##### 2022-05-22
 
