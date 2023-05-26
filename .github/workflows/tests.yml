@@ -24,6 +24,16 @@ jobs:
             laravel: '9.52'
           - vanilo: '2.2'
             laravel: '10.0'
+          - vanilo: '4.0'
+            laravel: '8.0'
+          - vanilo: '4.0'
+            laravel: '8.22.1'
+          - vanilo: '4.0'
+            laravel: '8.83'
+          - vanilo: '4.0'
+            laravel: '9.0'
+          - vanilo: '4.0'
+            laravel: '9.52'
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }} Vanilo ${{ matrix.vanilo }}
     steps:
       - name: Checkout
