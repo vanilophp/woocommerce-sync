@@ -54,8 +54,7 @@ jobs:
           tools: composer:v2
       - name: Set Package Versions
         run: |
-          composer require "illuminate/support:${{ matrix.laravel }}.*" --no-update -v
-          composer require "illuminate/console:${{ matrix.laravel }}.*" --no-update -v
+          composer require "laravel/framework:${{ matrix.laravel }}.*" --no-update -v
           composer require "vanilo/product:${{ matrix.vanilo }}.*" --no-update -v
           composer require "vanilo/category:${{ matrix.vanilo }}.*" --no-update -v
           composer require "vanilo/properties:${{ matrix.vanilo }}.*" --no-update -v
