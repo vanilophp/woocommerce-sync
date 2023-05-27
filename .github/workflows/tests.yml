@@ -67,7 +67,8 @@ jobs:
           is_smaller_version "${{ matrix.laravel }}" "9.12" && composer req "orchestra/testbench-core:7.4.0" --no-update
           is_smaller_version "${{ matrix.laravel }}" "9.7" && composer req "orchestra/testbench-core:7.3.0" --no-update
           is_smaller_version "${{ matrix.laravel }}" "9.6" && composer req "orchestra/testbench-core:7.2.0" --no-update
-          is_smaller_version "${{ matrix.laravel }}" "9.5" && composer req "orchestra/testbench-core:7.1.0" --no-update || true
+          is_smaller_version "${{ matrix.laravel }}" "9.5" && composer req "orchestra/testbench-core:7.1.0" --no-update
+          is_smaller_version "${{ matrix.laravel }}" "8.84" && composer req "orchestra/testbench-core:^6.0" --no-update || true
       - name: Composer Install
         run: composer install --prefer-dist --no-progress --no-interaction
       - name: Create SQLite Database
