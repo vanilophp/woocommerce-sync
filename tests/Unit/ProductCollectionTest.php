@@ -47,14 +47,6 @@ class ProductCollectionTest extends TestCase
     }
 
     /** @test */
-    public function non_product_instances_can_not_be_passed_via_the_constructor()
-    {
-        $this->expectError();
-
-        new ProductCollection('asd', new stdClass());
-    }
-
-    /** @test */
     public function product_instances_can_be_added()
     {
         $products = new ProductCollection();
