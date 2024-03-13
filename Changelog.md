@@ -6,6 +6,7 @@
 - Added Laravel 11 support
 - Dropped Vanilo 2 - 3 support
 - Dropped Laravel 8 - 9 support
+- Dropped PHP 8.1 support
 
 ## 1.2.0
 ##### 2024-03-13
